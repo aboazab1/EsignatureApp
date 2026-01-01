@@ -1,38 +1,145 @@
-.App {
+/* 1. VARIABLES */
+:root {
+  --primary-color: #3b82f6;
+  --secondary-color: #1e293b;
+  --bg-color: #f8fafc;
+  --text-color: #0f172a;
+  --text-muted: #64748b;
+  --white: #ffffff;
+  --transition: all 0.3s ease;
+  --container-width: 1200px;
+}
+
+/* 2. BASE RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  direction: ltr; 
+}
+
+/* 3. LAYOUT CONTAINER */
+.container {
+  width: 95%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 60px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* 4. TYPOGRAPHY */
+.title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: var(--secondary-color);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.025em;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.subtitle {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.description-text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-muted);
+  margin: 20px auto;
+  max-width: 800px;
+  text-align: center;
+}
+
+/* 5. INPUT GROUP STYLING */
+.input-group-row {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 800px;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.custom-input {
+  flex: 1;
+  padding: 0.8rem 1.2rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: var(--transition);
+  outline: none;
+  background-color: var(--white);
+  color: var(--text-color);
+  min-height: 52px;
+}
+
+.custom-input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+/* 6. THE ULTIMATE DATE INPUT FIX */
+/* إجبار الأرقام الإنجليزية ومنع أي ترجمة داخلية للمتصفح */
+input[type="date"] {
+  direction: ltr; /* يضمن ترتيب mm/dd/yyyy */
+  text-align: left;
+  font-variant-numeric: tabular-nums; /* إجبار الأرقام اللاتينية */
+}
+
+/* إخفاء نصوص "يوم/شهر/سنة" الرمادية تماماً */
+input[type="date"]::-webkit-datetime-edit-text,
+input[type="date"]::-webkit-datetime-edit-month-field,
+input[type="date"]::-webkit-datetime-edit-day-field,
+input[type="date"]::-webkit-datetime-edit-year-field {
+  color: transparent;
+}
+
+/* إظهار الأرقام فقط عندما يختار المستخدم تاريخاً */
+input[type="date"]:valid::-webkit-datetime-edit-text,
+input[type="date"]:valid::-webkit-datetime-edit-month-field,
+input[type="date"]:valid::-webkit-datetime-edit-day-field,
+input[type="date"]:valid::-webkit-datetime-edit-year-field {
+  color: var(--text-color);
+}
+
+/* أيقونة التقويم */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: invert(0.4); /* يجعل لون الأيقونة متناسقاً مع التصميم */
+}
+
+/* 7. UTILITIES */
+.btn {
+  padding: 0.8rem 2.5rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  background-color: var(--primary-color);
   color: white;
+  font-weight: 700;
+  margin-top: 2rem;
+  transition: var(--transition);
 }
 
-.App-link {
-  color: #61dafb;
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+@media (max-width: 600px) {
+  .input-group-row { flex-direction: column; }
 }
